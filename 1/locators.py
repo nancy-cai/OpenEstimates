@@ -52,4 +52,21 @@ class CapturePageLocators(object):
     start_ranking_button = (By.ID,"btn-start-ranking")
 
 class ComparePageLocators(object):
+    compare_condition = (By.XPATH,"//div[@data-question-id='8']/a")
+    compare_size = (By.XPATH, "//div[@data-question-id='14']/a")
+    compare_feature  = (By.XPATH, "//div[@data-question-id='15']/a")
+    compare_location  = (By.XPATH, "//div[@data-question-id='16']/a")
+    compare_worth  = (By.XPATH, "//div[@data-question-id='17']/a")
+    skip = (By.ID,"skip-property-btn")
+    photo_prev = (By.XPATH, "//*[@id=property-image-carousel']/div[4]/a[1]")
+    photo_next = (By.XPATH, "//*[@id=property-image-carousel']/div[4]/a[2]")
+    question_prev = (By.XPATH,"//*[@id='property-questions-carousel']/div[3]/a[1]")
+    question_next = (By.XPATH,"//*[@id='property-questions-carousel']/div[3]/a[2]")
+    map_photo =(By.ID, "map-explain")
     
+class LeadCapturePageLocators(object):
+    result_estimation = (By.id, "results-estimate")
+    lead_title_text = (By.XPATH, "//*[@id='results-feedback']/div/div[2]/h1")    
+    lead_name = (By.ID,"name-input-lead")
+    lead_email = (By.ID,"email-input-lead")
+    lead_phone = (By.ID,"phone-input-lead")

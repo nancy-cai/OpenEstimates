@@ -6,7 +6,7 @@ Created on Dec 13, 2016
 import unittest
 from selenium import webdriver
 
-class Test(unittest.TestCase):
+class TestAssertEqaul(unittest.TestCase):
 
 
     def setUp(self):
@@ -16,12 +16,12 @@ class Test(unittest.TestCase):
 
 
     def tearDown(self):
-        self.assertEqual(driver.title, "Traveling Tony's Photography - Welcome")
+        driver.quit()
         
 
 
-    def testName(self):
-        driver.quit()
+    def testAssert(self):
+       self.assertTrue((driver.title=="Traveling Tony's Photography - Welcome")|(driver.title=="Find and Compare the Best Real Estate Agents - OpenAgent"))
 
 
 if __name__ == "__main__":

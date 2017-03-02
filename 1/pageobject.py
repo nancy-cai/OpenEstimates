@@ -189,4 +189,15 @@ class PropertyCapturePage(BasePage):
                 value.click()
                 break
             
-    def 
+    def verify_lead_title(self):
+        self.wait_until_visible(LeadCapturePageLocators.lead_title_text)
+        title_actual = self.driver.find_element(*LeadCapturePageLocators.lead_title_text).text
+        title_expect1 = 'Create your very own Property Profile.'  
+        title_expect2 = 'Sign up to see the sold prices of the properties you just compared'      
+        title_expect3 = 'Sign up to compare more properties and continue to refine your estimate'
+        try:
+            self.assertTrue((title_actual==title_expect1)|(title_actual==title_expect2)|(title_actual==title_expect3))
+        except Exception:
+            print 'Title not right'
+            
+        

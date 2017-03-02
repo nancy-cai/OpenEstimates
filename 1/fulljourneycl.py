@@ -36,16 +36,11 @@ class Test(unittest.TestCase):
         estimate_page.choose_property_type('Apartment')
         estimate_page.choose_relation('Investor')
         estimate_page.choose_condition('Good')
-        time.sleep(2)
         estimate_page.change_attributes()
-        time.sleep(2)
         estimate_page.click_next()
-        time.sleep(2)
         estimate_page.choose_special_features('Pool')
-        time.sleep(2)
         estimate_page.click_start_ranking()
-        time.sleep(5)
-
+    
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
