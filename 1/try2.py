@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
 
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
-        self.driver.get('http://wwwuat.openestimates.com.au/')
+        self.driver.get('http://www.openestimates.com.au/')
  
     def test_logo_navigation(self):
         main_page = pageobject.MainPage(self.driver)

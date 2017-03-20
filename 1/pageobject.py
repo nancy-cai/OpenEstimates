@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import CapturePageLocators
 from locators import MainPageLocators
+from locators import LeadCapturePageLocators
 from token import EQUAL
 import sys
 from selenium.webdriver.support import expected_conditions as EC
@@ -143,19 +144,27 @@ class PropertyCapturePage(BasePage):
     def click_start_ranking(self):
         self.driver.find_element(*CapturePageLocators.start_ranking_button).click()
         
+    def compare_loop(self, con,sz,fea,lo,va):
+        for i in range(0,3):
+            self.choose_compare_condition(con)
+            self.choose_compare_size(sz)
+            self.choose_compare_feature(fea)
+            self.choose_compare_location(lo)
+            self.choose_compare_worth(va)
+        
     def choose_compare_condition(self, con):
         try:
             self.wait_until_visible(ComparePageLocators.compare_condition)
             
         except TimeoutException:
             print 'took too long'
-        
-         
+                
         conditions = self.driver.find_elements(*ComparePageLocators.compare_condition)
         for condition in conditions:
             if  condition.text == con:
                 condition.click()
                 break  
+            
             
     def choose_compare_size(self, sz):
         self.wait_until_visible(ComparePageLocators.compare_size)
@@ -190,14 +199,76 @@ class PropertyCapturePage(BasePage):
                 break
             
     def verify_lead_title(self):
-        self.wait_until_visible(LeadCapturePageLocators.lead_title_text)
+        try:
+            self.wait_until_visible(LeadCapturePageLocators.result_estimation)
+        except TimeoutException:
+            print 'lead page time out'
         title_actual = self.driver.find_element(*LeadCapturePageLocators.lead_title_text).text
         title_expect1 = 'Create your very own Property Profile.'  
         title_expect2 = 'Sign up to see the sold prices of the properties you just compared'      
         title_expect3 = 'Sign up to compare more properties and continue to refine your estimate'
         try:
-            self.assertTrue((title_actual==title_expect1)|(title_actual==title_expect2)|(title_actual==title_expect3))
+            assert title_actual == title_expect2 or title_actual ==title_expect1 or title_actual ==title_expect3
         except Exception:
             print 'Title not right'
+            print title_actual
             
+    def lead_form(self,name,email,phone):
+          lead_name=self.driver.find_element(*LeadCapturePageLocators.lead_name)
+          lead_name.click()
+          lead_name.send_keys(name)
+          lead_email=self.driver.find_element(*LeadCapturePageLocators.lead_email)
+          lead_email.click()
+          lead_email.send_keys(email)
+          lead_phone=self.driver.find_element(*LeadCapturePageLocators.lead_phone)
+          lead_phone.click()
+          lead_phone.send_keys(phone)
+          
+    def click_get_started(self):
+        self.driver.find_element(*LeadCapturePageLocators.get_started).click()  
+    
+    def verify_thank_you_title(self):
+        try:
+            self.wait_until_visible(LeadCapturePageLocators.thank_you)
+        except TimeoutException:
+            print 'thank you timeout'    
+        actual_thank_title = self.driver.find_element(*LeadCapturePageLocators.thank_you).text
+        expected_actual_title = 'Thank you.'
+        try:
+             assertTrue(actual_thank_title == expected_actual_title)
+        except Exception:
+            print 'thank you page wrong'
         
+        
+    def choose_whether_to_sell(self,sell):
+        self.wait_until_visible(LeadCapturePageLocators.whether_sell)
+        sell_options=self.driver.find_elements(*LeadCapturePageLocators.whether_sell)
+        for sell_option in sell_options:
+            if sell_option.text == sell:
+                sell_option.click()
+                break
+                
+    def choose_when_to_sell(self,when):
+        self.wait_until_visible(LeadCapturePageLocators.when_to_sell)
+        when_options=self.driver.find_elements(*LeadCapturePageLocators.when_to_sell)
+        for when_option in when_options:
+            if when_option.text == when:
+                when_option.click()
+                break
+            
+    def choose_call_back(self,call):
+        self.wait_until_visible(LeadCapturePageLocators.call_back)
+        callback_options=self.driver.find_elements(*LeadCapturePageLocators.call_back)
+        for call_option in callback_options:
+            if call_option == call:
+                call_option.click()
+                break
+            
+    def verify_call_back_msg(self):
+        self.wait_until_visible(LeadCapturePageLocators.result_call_text)
+        actual_call_back_msg = self.driver.find_element(*LeadCapturePageLocators.result_call_text)
+        expected_call_msg = 'Great! Someone from our team will be in touch with you shortly.'
+        try:
+            assertTrue(actual_call_back_msg == expected_call_msg)
+        except Exception:
+            print 'call back msg assert failed'                        

@@ -19,14 +19,14 @@ class Test(unittest.TestCase):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get('http://www.openestimates.com.au/')
+        self.driver.get('http://wwwuat.openestimates.com.au/')
  
 
     def tearDown(self):
         self.driver.quit()
 
 
-    def testFullOEJourneywithCL(self):
+    def testFullOEJourney(self):
         main_page = pageobject.MainPage(self.driver)
         estimate_page = pageobject.PropertyCapturePage(self.driver)
         main_page.click_first_estimate_my_property()
@@ -40,6 +40,16 @@ class Test(unittest.TestCase):
         estimate_page.click_next()
         estimate_page.choose_special_features('Pool')
         estimate_page.click_start_ranking()
+        estimate_page.compare_loop('Better','Smaller','Worse','About the same', 'More')
+        estimate_page.verify_lead_title()
+        estimate_page.lead_form('nancy test','cainaisi@qq.com','0414660628')
+        estimate_page.click_get_started()
+        estimate_page.verify_thank_you_title
+        estimate_page.choose_whether_to_sell('Yes')
+        estimate_page.choose_when_to_sell('Not sure')
+        estimate_page.choose_call_back('Yes')
+        estimate_page.verify_call_back_msg
+
     
 
 if __name__ == "__main__":

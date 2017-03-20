@@ -65,8 +65,14 @@ class ComparePageLocators(object):
     map_photo =(By.ID, "map-explain")
     
 class LeadCapturePageLocators(object):
-    result_estimation = (By.id, "results-estimate")
+    result_estimation = (By.ID, "results-estimate")
     lead_title_text = (By.XPATH, "//*[@id='results-feedback']/div/div[2]/h1")    
     lead_name = (By.ID,"name-input-lead")
     lead_email = (By.ID,"email-input-lead")
     lead_phone = (By.ID,"phone-input-lead")
+    get_started = (By.LINK_TEXT, "Get started")
+    thank_you = (By.XPATH, "//*[@id='results-box']/div[3]/div[1]/b")
+    whether_sell = (By.XPATH, "//*[@id='results-selling-question']/div/a")
+    when_to_sell = (By.XPATH, "//*[@id='results-selling-period']/div/a")
+    call_back = (By.XPATH, "//*[@id='results-agents-shortlist']/div/a")
+    result_call_text = (By.XPATH, "//*[@id='results-thank-you']/p")
