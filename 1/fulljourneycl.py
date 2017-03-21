@@ -41,14 +41,19 @@ class Test(unittest.TestCase):
         estimate_page.choose_special_features('Pool')
         estimate_page.click_start_ranking()
         estimate_page.compare_loop('Better','Smaller','Worse','About the same', 'More')
-        estimate_page.verify_lead_title()
+        estimate_page.verify_new_lead_title()
         estimate_page.lead_form('nancy test','cainaisi@qq.com','0414660628')
-        estimate_page.click_get_started()
-        estimate_page.verify_thank_you_title
-        estimate_page.choose_whether_to_sell('Yes')
-        estimate_page.choose_when_to_sell('Not sure')
-        estimate_page.choose_call_back('Yes')
-        estimate_page.verify_call_back_msg
+        estimate_page.click_get_my_estimate()
+        estimate_page.verify_sign_in_title()
+        estimate_page.enter_sign_in_pass('111')
+        estimate_page.click_see_my_estimate()
+        estimate_page.verify_address_on_pp()
+        time.sleep(2)
+#         estimate_page.verify_thank_you_title
+#         estimate_page.choose_whether_to_sell('Yes')
+#         estimate_page.choose_when_to_sell('Not sure')
+#         estimate_page.choose_call_back('Yes')
+#         estimate_page.verify_call_back_msg
 
     
 
